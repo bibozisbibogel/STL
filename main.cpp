@@ -12,6 +12,7 @@ struct problems {
     string problema;
     string specialitateNecesara;
 };
+/// overloaded function
 bool operator==(const problems& p, const doctors& d)
 {
     return p.specialitateNecesara == d.specializare;

@@ -1,33 +1,51 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-
+#include <vector>
+#include <algorithm>
 using namespace std;
-
+struct doctors {
+    string nume;
+    string specializare;
+};
+struct problems {
+    string problema;
+    string specialitateNecesara;
+};
+bool operator==(const problems& p, const doctors& d)
+{
+    return p.specialitateNecesara == d.specializare;
+}
 int main()
 {
-    ifstream inFile("input.txt");
 
+    vector<problems> probleme;
+    vector<doctors> doctori;
+    ifstream inFile("input.txt");
     int no_problems, no_doctors;
     string name, speciality;
-    
     inFile >> no_problems;
-
     for (int i = 0; i < no_problems; i++)
     {
         inFile >> name;
         inFile >> speciality;
-        cout << name << ' ' << speciality << '\n';
+        probleme.emplace_back(name, speciality);
     }
-
     inFile >> no_doctors;
-
     for (int i = 0; i < no_doctors; i++)
     {
         inFile >> name;
         inFile >> speciality;
-        cout << name << ' ' << speciality << '\n';
+        doctori.emplace_back(name, speciality);
     }
 
+    for (auto& i : probleme)
+    {
+        auto it = find(doctori.begin(), doctori.end(), i);
+        if (it == doctori.end())
+            cout << i.problema << " " << "Respins\n";
+        else
+            cout << i.problema << " " << "Acceptat\n";
+    }
     return 0;
 }

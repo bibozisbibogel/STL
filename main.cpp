@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#define FAST ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 using namespace std;
 struct doctors {
     string nume;
